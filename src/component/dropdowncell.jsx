@@ -1,3 +1,4 @@
+import { MenuItem, Select } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 export const DropdownCell = ({ row, onChange, isEditable }) => {
@@ -14,18 +15,19 @@ export const DropdownCell = ({ row, onChange, isEditable }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <select
+    // <div style={{ display: 'flex', alignItems: 'center' }}>
+      <Select
         value={selectedValue}
         onChange={handleChange}
-        disabled={!isEditable} // Disable based on isEditable prop
+        disabled={!isEditable} 
+        fullWidth
       >
-        <option value="">Select a reason</option>
-        <option value="accepted">Accepted</option>
-        <option value="rejected">Rejected</option>
-        <option value="modify">Modify</option>
+        <MenuItem value="">Select a reason</MenuItem>
+        <MenuItem value="accepted">Accepted</MenuItem>
+        <MenuItem value="rejected">Rejected</MenuItem>
+        <MenuItem value="modify">Modify</MenuItem>
         {/* Add other options as needed */}
-      </select>
-    </div>
+      </Select>
+    // </div>
   );
 };

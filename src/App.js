@@ -3,11 +3,12 @@ import { Datatable } from './component/datatable';
 import { Navbar } from './component/navbar';
 
 function App() {
+  const currentScreen = 'screenA';
   return (
    <>
    <div>
     <Navbar />
-    <Datatable/>
+    <Datatable currentScreen={currentScreen} />
    </div>
    </>
   );

@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React from 'react';
 
 export const CommentCell = ({ row, onChange, isEditable }) => {
@@ -6,12 +7,14 @@ export const CommentCell = ({ row, onChange, isEditable }) => {
   };
 
   return (
-    <input
+    <TextField
       type="text"
       value={row.comment || ''}
       onChange={handleCommentChange}
       disabled={!isEditable} // Enable based on isEditable prop
       placeholder={isEditable ? 'Add a comment' : ''}
+      fullWidth
+      variant='outlined'
     />
   );
 };
