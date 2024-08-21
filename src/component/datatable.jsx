@@ -8,33 +8,36 @@ export const Datatable = ({currentScreen}) => {
 
     function generateRandomData(numEntries) {
         const reasons = ['accepted', 'rejected', 'modify', ''];
-        const comments = ['ok tested', 'oks tested', 'oks tddested', ''];
-        const names = ['x53235', 'x553235', 'xs53235', 'xs53xx235', 'xs53454235', 'ss', 'dddd', 'sss'];
-      
+        const comments = ['ok tested', 'oks tested', 'oks tddested'];
+    
         const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];
       
         const getRandomDate = () => {
-          const start = new Date(2020, 0, 1);
-          const end = new Date(2024, 0, 1);
-          const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-          return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+            const start = new Date(2020, 0, 1);
+            const end = new Date(2024, 0, 1);
+            const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
         };
       
         const data = [];
         for (let i = 0; i < numEntries; i++) {
-          data.push({
-            id: i + 1,
-            name: getRandomItem(names),
-            reason: getRandomItem(reasons),
-            comment: getRandomItem(comments),
-            datetime: getRandomDate(),
-          });
+            const reason = getRandomItem(reasons);
+            const comment = reason === '' ? '' : getRandomItem(comments);
+    
+            data.push({
+                id: i + 1,
+                name: getRandomItem(['x53235', 'x553235', 'xs53235', 'xs53xx235', 'xs53454235', 'ss', 'dddd', 'sss']),
+                reason: reason,
+                comment: comment,
+                datetime: getRandomDate(),
+            });
         }
       
         return data;
-      }
-  // Initialize state with table data
-  const [tableData, setTableData] = useState(generateRandomData(1000));
+    }
+    
+
+  const [tableData, setTableData] = useState(generateRandomData(500));
 
 //   [
 //     { id: 1, name: 'x53235', reason: 'accepted', comment: 'ok tested', datetime: '12/12/2020 12:00 PM' },
