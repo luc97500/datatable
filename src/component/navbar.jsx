@@ -156,17 +156,17 @@ export function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1, padding: "20px" }}>
-      <AppBar position="static" sx={{ backgroundColor: "#6F6096" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#f5cba7" }}>
         <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" , color:'#34495e'} }}
           >
-            DataTable
+            DataControl Web-App
           </Typography>
-          <Search>
+          <Search sx={{color:'black' ,  border:'1px solid black'}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>

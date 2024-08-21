@@ -11,9 +11,9 @@ export const Datatable = ({ currentScreen }) => {
   function generateUniqueRows(count) {
     const reasons = ["accepted", "rejected", "modify", ""];
     const comments = {
-      accepted: ["ok tested", "good to go", "all set"],
-      rejected: ["not good", "needs work", "rejected"],
-      modify: ["oks tddested", "needs changes", "update required"],
+      accepted: ["ok tested", "good to go", "all set" ,"ok nice good to go"],
+      rejected: ["not good", "needs work", "rejected","reevaluated"],
+      modify: ["oks tddested", "needs changes", "update required","modified control"],
       "": [""],
     };
 
@@ -162,7 +162,7 @@ export const Datatable = ({ currentScreen }) => {
   const customStyles = {
     headCells: {
       style: {
-        backgroundColor: "#f4f4f4",
+        backgroundColor: "#f9e79f",
         fontWeight: "bold",
         fontSize: "14px",
         justifyContent: "center",
@@ -184,6 +184,7 @@ export const Datatable = ({ currentScreen }) => {
       style: {
         display: "flex",
         justifyContent: "center",
+        backgroundColor: "#f4f4f4",
       },
     },
   };
