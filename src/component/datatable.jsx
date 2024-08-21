@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import { DropdownCell } from "./dropdowncell";
 import { CommentCell } from "./commentCell";
 import "./datable.css";
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
@@ -11,9 +11,9 @@ export const Datatable = ({ currentScreen }) => {
   function generateUniqueRows(count) {
     const reasons = ["accepted", "rejected", "modify", ""];
     const comments = {
-      accepted: ["ok tested", "good to go", "all set" ,"ok nice good to go"],
-      rejected: ["not good", "needs work", "rejected","reevaluated"],
-      modify: ["oks tddested", "needs changes", "update required","modified control"],
+      accepted: ["ok tested", "good to go", "all set", "ok nice good to go"],
+      rejected: ["not good", "needs work", "rejected", "reevaluated"],
+      modify: ["oks tddested", "needs changes", "update required", "modified control"],
       "": [""],
     };
 
@@ -59,81 +59,14 @@ export const Datatable = ({ currentScreen }) => {
   }
 
   const [tableData, setTableData] = useState(generateUniqueRows(200));
-
-  //   const [tableData, setTableData] = useState([
-  //     {
-  //       id: 1,
-  //       name: "x53235",
-  //       reason: "accepted",
-  //       comment: "ok tested",
-  //       datetime: "12/12/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "x553235",
-  //       reason: "",
-  //       comment: "",
-  //       datetime: "17/12/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "xs53235",
-  //       reason: "rejected",
-  //       comment: "oks tested",
-  //       datetime: "17/12/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "xs53xx235",
-  //       reason: "accepted",
-  //       comment: "oks tested",
-  //       datetime: "17/10/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 5,
-  //       name: "xs53454235",
-  //       reason: "modify",
-  //       comment: "oks tddested",
-  //       datetime: "17/10/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 6,
-  //       name: "ss",
-  //       reason: "",
-  //       comment: "",
-  //       datetime: "15/10/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 7,
-  //       name: "xs53235",
-  //       reason: "rejected",
-  //       comment: "oks tested",
-  //       datetime: "17/12/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 8,
-  //       name: "dddd",
-  //       reason: "accepted",
-  //       comment: "oks tested",
-  //       datetime: "17/10/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 9,
-  //       name: "sss",
-  //       reason: "modify",
-  //       comment: "oks tddested",
-  //       datetime: "17/10/2020 12:00 PM",
-  //     },
-  //     {
-  //       id: 10,
-  //       name: "ss",
-  //       reason: "",
-  //       comment: "",
-  //       datetime: "15/10/2020 12:00 PM",
-  //     },
-  //   ]);
-  
   const [editedRows, setEditedRows] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredData = tableData.filter((row) =>
+    Object.values(row).some((value) =>
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
 
   const handleDropdownChange = (id, newValue) => {
     setTableData((prevData) =>
@@ -157,6 +90,10 @@ export const Datatable = ({ currentScreen }) => {
     const editedData = tableData.filter((row) => editedRows[row.id]);
     console.log("Submitted data:", editedData);
     setEditedRows({});
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   const customStyles = {
@@ -248,11 +185,28 @@ export const Datatable = ({ currentScreen }) => {
 
   return (
     <>
+      <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'flex-end', 
+        mb: 2, 
+      }}
+    >
+      <TextField
+        label="Search"
+        variant="outlined"
+        size="small"
+        onChange={handleSearchChange}
+        sx={{ width: 300 }} 
+      />
+    </Box>
+    
       <div className="data-table-wrapper">
         <div className="data-table-container">
+          
           <DataTable
             columns={columns}
-            data={tableData}
+            data={filteredData}
             fixedHeader
             pagination
             paginationRowsPerPageOptions={[50, 100, 150, 200]}

@@ -166,15 +166,6 @@ export function Navbar() {
           >
             DataControl Web-App
           </Typography>
-          <Search sx={{color:'black' ,  border:'1px solid black'}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
