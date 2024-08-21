@@ -4,6 +4,7 @@ import { DropdownCell } from "./dropdowncell";
 import { CommentCell } from "./commentCell";
 import "./datable.css"; // Import your CSS file
 import { Box, Button } from "@mui/material";
+import { Padding } from "@mui/icons-material";
 
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
@@ -260,31 +261,30 @@ export const Datatable = ({ currentScreen }) => {
         </div>
       </div>
 
-      <div>
-        <Box
+      {/* <div> */}
+      <Box
+        sx={{
+          minHeight: "5vh", 
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end", // Aligns content to the bottom
+          alignItems: "center", // Centers content horizontally
+          p: 2,
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
           sx={{
-            position: "fixed",
-            bottom: 16,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
+            minWidth: 120,
+            height: 40,
           }}
+          onClick={handleSubmit}
         >
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              minWidth: 120,
-              height: 40,
-            }}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
-        </Box>
-      </div>
+          Submit
+        </Button>
+      </Box>
+      {/* </div> */}
     </>
   );
 };
