@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import './App.css';
 import { Datatable } from './component/datatable';
 import { Navbar } from './component/navbar';
+import {Footercomponent} from './component/Footer';
 
 function App() {
   const currentScreen = 'screenA';
@@ -19,6 +20,7 @@ function App() {
           }}> 
       <Datatable currentScreen={currentScreen} />  
     </Box>
+    <Footercomponent />
    </div>
    </>
   );

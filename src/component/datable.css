@@ -26,7 +26,7 @@
     bottom: 0;
     background: white;
     z-index: 1;
-    border-top: 1px solid #676363; /* Border at the top of the pagination */
+    border-top: 1px solid #111010; /* Border at the top of the pagination */
 }
 
 .data-table-container .rdt_TableBody {

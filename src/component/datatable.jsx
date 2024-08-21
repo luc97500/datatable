@@ -164,7 +164,7 @@ export const Datatable = ({ currentScreen }) => {
       style: {
         backgroundColor: "#f4f4f4",
         fontWeight: "bold",
-        fontSize: "16px",
+        fontSize: "14px",
         justifyContent: "center",
       },
     },
