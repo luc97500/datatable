@@ -4,6 +4,7 @@ import { DropdownCell } from "./dropdowncell";
 import { CommentCell } from "./commentCell";
 import "./datable.css";
 import { Box, Button, TextField } from "@mui/material";
+import Swal from "sweetalert2";
 
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
@@ -13,7 +14,12 @@ export const Datatable = ({ currentScreen }) => {
     const comments = {
       accepted: ["ok tested", "good to go", "all set", "ok nice good to go"],
       rejected: ["not good", "needs work", "rejected", "reevaluated"],
-      modify: ["oks tddested", "needs changes", "update required", "modified control"],
+      modify: [
+        "oks tddested",
+        "needs changes",
+        "update required",
+        "modified control",
+      ],
       "": [""],
     };
 
@@ -89,6 +95,21 @@ export const Datatable = ({ currentScreen }) => {
   const handleSubmit = () => {
     const editedData = tableData.filter((row) => editedRows[row.id]);
     console.log("Submitted data:", editedData);
+    let text = "";
+
+    let name = editedData.map(record => record.name);
+
+    if (editedData.length == 0) {
+      text = "You have not made any changes in Grid data!";
+    } else {
+      text = "Great! Changes saved For User : " + name;
+    }
+
+    Swal.fire({
+      title: "Data Saved SuccessFully!",
+      text: text,
+      icon: "success",
+    });
     setEditedRows({});
   };
 
@@ -186,24 +207,23 @@ export const Datatable = ({ currentScreen }) => {
   return (
     <>
       <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-end', 
-        mb: 2, 
-      }}
-    >
-      <TextField
-        label="Search"
-        variant="outlined"
-        size="small"
-        onChange={handleSearchChange}
-        sx={{ width: 300 }} 
-      />
-    </Box>
-    
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          mb: 2,
+        }}
+      >
+        <TextField
+          label="Search"
+          variant="outlined"
+          size="small"
+          onChange={handleSearchChange}
+          sx={{ width: 300 }}
+        />
+      </Box>
+
       <div className="data-table-wrapper">
         <div className="data-table-container">
-          
           <DataTable
             columns={columns}
             data={filteredData}

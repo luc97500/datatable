@@ -162,7 +162,7 @@ export function Navbar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" , color:'#34495e'} }}
+            sx={{ display: { xs: "none", sm: "block" , color:'#34495e' ,   textAlign: 'center',fontWeight: 'bold'}}}
           >
             DataControl Web-App
           </Typography>
