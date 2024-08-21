@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import DataTable from "react-data-table-component";
 import { DropdownCell } from "./dropdowncell";
 import { CommentCell } from "./commentCell";
-import "./datable.css"; // Import your CSS file
+import "./datable.css";
 import { Box, Button } from "@mui/material";
-import { Padding } from "@mui/icons-material";
 
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
@@ -133,8 +132,8 @@ export const Datatable = ({ currentScreen }) => {
   //       datetime: "15/10/2020 12:00 PM",
   //     },
   //   ]);
-
-  const [editableRows, setEditableRows] = useState({});
+  
+  const [editedRows, setEditedRows] = useState({});
 
   const handleDropdownChange = (id, newValue) => {
     setTableData((prevData) =>
@@ -142,7 +141,7 @@ export const Datatable = ({ currentScreen }) => {
         row.id === id ? { ...row, reason: newValue } : row
       )
     );
-    setEditableRows((prev) => ({ ...prev, [id]: true }));
+    setEditedRows((prev) => ({ ...prev, [id]: true }));
   };
 
   const handleCommentChange = (id, newComment) => {
@@ -151,12 +150,13 @@ export const Datatable = ({ currentScreen }) => {
         row.id === id ? { ...row, comment: newComment } : row
       )
     );
-    setEditableRows((prev) => ({ ...prev, [id]: true }));
+    setEditedRows((prev) => ({ ...prev, [id]: true }));
   };
 
   const handleSubmit = () => {
-    console.log("Submitted data:", tableData);
-    setEditableRows({});
+    const editedData = tableData.filter((row) => editedRows[row.id]);
+    console.log("Submitted data:", editedData);
+    setEditedRows({});
   };
 
   const customStyles = {
@@ -205,7 +205,7 @@ export const Datatable = ({ currentScreen }) => {
         <DropdownCell
           row={row}
           onChange={handleDropdownChange}
-          isEditable={editableRows[row.id] || row.reason === ""}
+          isEditable={editedRows[row.id] || row.reason === ""}
         />
       ),
       sortable: true,
@@ -219,7 +219,7 @@ export const Datatable = ({ currentScreen }) => {
         <CommentCell
           row={row}
           onChange={handleCommentChange}
-          isEditable={editableRows[row.id]}
+          isEditable={editedRows[row.id]}
         />
       ),
       sortable: true,
@@ -261,14 +261,13 @@ export const Datatable = ({ currentScreen }) => {
         </div>
       </div>
 
-      {/* <div> */}
       <Box
         sx={{
-          minHeight: "5vh", 
+          minHeight: "5vh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end", // Aligns content to the bottom
-          alignItems: "center", // Centers content horizontally
+          justifyContent: "flex-end",
+          alignItems: "center",
           p: 2,
         }}
       >
@@ -284,7 +283,6 @@ export const Datatable = ({ currentScreen }) => {
           Submit
         </Button>
       </Box>
-      {/* </div> */}
     </>
   );
 };
