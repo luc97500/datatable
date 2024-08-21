@@ -155,7 +155,7 @@ export function Navbar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 , padding:'20px'}}>
       <AppBar position="static">
         <Toolbar>
           <Typography
