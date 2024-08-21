@@ -48,6 +48,7 @@ export const Datatable = ({ currentScreen }) => {
         name: name,
         reason: reason,
         comment: comment,
+        requestnumber:name+i,
         datetime: randomDate(),
       };
       rows.push(row);
@@ -195,6 +196,14 @@ export const Datatable = ({ currentScreen }) => {
         return a.comment.localeCompare(b.comment);
       },
     },
+    {
+        name: "RequestNumber",
+        selector: (row) => row.requestnumber,
+        sortable: true,
+        sortFunction: (a, b) => {
+          return a.requestnumber.localeCompare(b.requestnumber);
+        },
+      },
     {
       name: "DateTime",
       selector: (row) => row.datetime,

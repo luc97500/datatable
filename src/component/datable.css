@@ -6,9 +6,12 @@
 
 .data-table-container {
     flex: 1;
+    padding: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    border: 1px solid #4f4e4e;
+    align-items: center;
 }
 
 .data-table-container .rdt_TableHead {
@@ -16,7 +19,7 @@
     top: 0;
     background: white;
     z-index: 1;
-    border-bottom: 1px solid #ddd; /* Border at the bottom of the header */
+    border: 1px solid #4f4e4e; /* Border at the bottom of the header */
 }
 
 .data-table-container .rdt_TablePagination {
@@ -24,7 +27,7 @@
     bottom: 0;
     background: white;
     z-index: 1;
-    border-top: 1px solid #ddd; /* Border at the top of the pagination */
+    border-top: 1px solid #676363; /* Border at the top of the pagination */
 }
 
 .data-table-container .rdt_TableBody {
@@ -33,28 +36,28 @@
 }
 
 .data-table-container .rdt_TableRow {
-    border-bottom: 1px solid #ddd; /* Border between rows */
+    border-bottom: 1px solid #6f6e6e; /* Border between rows */
 }
 
 .data-table-container .rdt_TableCell {
-    border-right: 1px solid #ddd; /* Border between columns */
+    border-right: 1px solid #6f6e6e; /* Border between columns */
     padding: 2px; /* Reduced padding for row height */
     line-height: 1.5; /* Adjusted line-height for better row height */
 }
 
 /* Border at the end of each row to ensure full border around the table */
 .data-table-container .rdt_TableRow:last-child .rdt_TableCell {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #6f6e6e;
 }
 
 .data-table-container .rdt_TableRow:first-child .rdt_TableCell {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #6f6e6e;
 }
 
 .data-table-container .rdt_TableHead .rdt_TableCell {
-    border-bottom: 2px solid #ddd; /* Thicker border for header cells */
-    background: #f4f4f4; /* Background color for header cells */
+    border-bottom: 2px solid #dc0808; /* Thicker border for header cells */
     font-weight: bold;
+    align-items: center;
 }
 
 /* Optional: Adding some space at the bottom of the table container for pagination */
