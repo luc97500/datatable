@@ -11,7 +11,6 @@
     flex-direction: column;
     overflow: hidden;
     border: 1px solid #4f4e4e;
-    align-items: center;
 }
 
 .data-table-container .rdt_TableHead {
@@ -55,7 +54,6 @@
 }
 
 .data-table-container .rdt_TableHead .rdt_TableCell {
-    border-bottom: 2px solid #dc0808; /* Thicker border for header cells */
     font-weight: bold;
     align-items: center;
 }

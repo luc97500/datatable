@@ -3,6 +3,7 @@ import DataTable from "react-data-table-component";
 import { DropdownCell } from "./dropdowncell";
 import { CommentCell } from "./commentCell";
 import "./datable.css"; // Import your CSS file
+import { Box, Button } from "@mui/material";
 
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
@@ -48,7 +49,7 @@ export const Datatable = ({ currentScreen }) => {
         name: name,
         reason: reason,
         comment: comment,
-        requestnumber:name+i,
+        requestnumber: name + i,
         datetime: randomDate(),
       };
       rows.push(row);
@@ -157,6 +158,35 @@ export const Datatable = ({ currentScreen }) => {
     setEditableRows({});
   };
 
+  const customStyles = {
+    headCells: {
+      style: {
+        backgroundColor: "#f4f4f4",
+        fontWeight: "bold",
+        fontSize: "16px",
+        justifyContent: "center",
+      },
+    },
+    rows: {
+      style: {
+        minHeight: "5px",
+        justifyContent: "center",
+      },
+    },
+    cells: {
+      style: {
+        fontSize: "14px",
+        justifyContent: "center",
+      },
+    },
+    pagination: {
+      style: {
+        display: "flex",
+        justifyContent: "center",
+      },
+    },
+  };
+
   const columns = [
     {
       name: "Id",
@@ -197,13 +227,13 @@ export const Datatable = ({ currentScreen }) => {
       },
     },
     {
-        name: "RequestNumber",
-        selector: (row) => row.requestnumber,
-        sortable: true,
-        sortFunction: (a, b) => {
-          return a.requestnumber.localeCompare(b.requestnumber);
-        },
+      name: "RequestNumber",
+      selector: (row) => row.requestnumber,
+      sortable: true,
+      sortFunction: (a, b) => {
+        return a.requestnumber.localeCompare(b.requestnumber);
       },
+    },
     {
       name: "DateTime",
       selector: (row) => row.datetime,
@@ -225,12 +255,36 @@ export const Datatable = ({ currentScreen }) => {
             pagination
             paginationRowsPerPageOptions={[50, 100, 150, 200]}
             paginationPerPage={50}
-            customRowClass="custom-row"
+            customStyles={customStyles}
           />
         </div>
       </div>
 
-      <button onClick={handleSubmit}>Submit</button>
+      <div>
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 16,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              minWidth: 120,
+              height: 40,
+            }}
+            onClick={handleSubmit}
+          >
+            Submit
+          </Button>
+        </Box>
+      </div>
     </>
   );
 };
