@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
 
+  // function to generate dummy records
   function generateUniqueRows(count) {
     const reasons = ["accepted", "rejected", "modify", ""];
     const comments = {
@@ -66,17 +67,21 @@ export const Datatable = ({ currentScreen }) => {
     return rows;
   }
 
+  // rows binding here in this state
   const [tableData, setTableData] = useState(generateUniqueRows(200));
+
   const [editedRows, setEditedRows] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [focusId, setFocusId] = useState(null);
 
+  // for search functionality
   const filteredData = tableData.filter((row) =>
     Object.values(row).some((value) =>
       value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
+  // Reason Dropdown change functionality
   const handleDropdownChange = (id, newValue) => {
     setTableData((prevData) =>
       prevData.map((row) =>
@@ -87,6 +92,7 @@ export const Datatable = ({ currentScreen }) => {
     setFocusId(id);
   };
 
+  // Commentchange funct.
   const handleCommentChange = (id, newComment) => {
     setTableData((prevData) =>
       prevData.map((row) =>
@@ -96,6 +102,7 @@ export const Datatable = ({ currentScreen }) => {
     setEditedRows((prev) => ({ ...prev, [id]: true }));
   };
 
+  // submit button funct.
   const handleSubmit = () => {
     const editedData = tableData.filter((row) => editedRows[row.id]);
 
@@ -128,6 +135,7 @@ export const Datatable = ({ currentScreen }) => {
     setEditedRows({});
   };
 
+  // search change event
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -167,6 +175,7 @@ export const Datatable = ({ currentScreen }) => {
     document.body.removeChild(link);
   }
 
+  // cutome css
   const customStyles = {
     headCells: {
       style: {
@@ -197,6 +206,7 @@ export const Datatable = ({ currentScreen }) => {
     },
   };
 
+  // columns binding are here
   const columns = [
     {
       name: "Id",
