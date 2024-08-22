@@ -67,6 +67,7 @@ export const Datatable = ({ currentScreen }) => {
   const [tableData, setTableData] = useState(generateUniqueRows(200));
   const [editedRows, setEditedRows] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const [focusId, setFocusId] = useState(null);
 
   const filteredData = tableData.filter((row) =>
     Object.values(row).some((value) =>
@@ -81,6 +82,7 @@ export const Datatable = ({ currentScreen }) => {
       )
     );
     setEditedRows((prev) => ({ ...prev, [id]: true }));
+    setFocusId(id);
   };
 
   const handleCommentChange = (id, newComment) => {
@@ -179,6 +181,7 @@ export const Datatable = ({ currentScreen }) => {
           row={row}
           onChange={handleCommentChange}
           isEditable={editedRows[row.id]}
+          focus={focusId === row.id}
         />
       ),
       sortable: true,
