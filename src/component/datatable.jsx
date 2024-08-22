@@ -64,7 +64,7 @@ export const Datatable = ({ currentScreen }) => {
     return rows;
   }
 
-  const [tableData, setTableData] = useState(generateUniqueRows(200));
+  const [tableData, setTableData] = useState(generateUniqueRows(1000));
   const [editedRows, setEditedRows] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [focusId, setFocusId] = useState(null);
