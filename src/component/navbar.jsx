@@ -80,6 +80,12 @@ export function Navbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleProfile = () => {
+    const url = 'https://lalitchaudhariportfolio.netlify.app/';
+    window.open(url, '_blank');
+    handleMenuClose()
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -97,8 +103,7 @@ export function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleProfile}>My Profile</MenuItem>
     </Menu>
   );
 
