@@ -5,6 +5,8 @@ import { CommentCell } from "./commentCell";
 import "./datable.css";
 import { Box, Button, TextField } from "@mui/material";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Datatable = ({ currentScreen }) => {
   console.log(currentScreen);
@@ -64,7 +66,7 @@ export const Datatable = ({ currentScreen }) => {
     return rows;
   }
 
-  const [tableData, setTableData] = useState(generateUniqueRows(1000));
+  const [tableData, setTableData] = useState(generateUniqueRows(200));
   const [editedRows, setEditedRows] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [focusId, setFocusId] = useState(null);
@@ -96,17 +98,28 @@ export const Datatable = ({ currentScreen }) => {
 
   const handleSubmit = () => {
     const editedData = tableData.filter((row) => editedRows[row.id]);
+
+    // ok missing comments in "rejected" or "modify" rows checking here
+    const missingComments = editedData.filter(
+      (row) =>
+        (row.reason === "rejected" || row.reason === "modify") && !row.comment
+    );
+
+    if (missingComments.length > 0) {
+      toast.error(
+        "Please Add Comments before Submitting for Reject or Modified Action!!"
+      );
+      return;
+    }
+
     console.log("Submitted data:", editedData);
     let text = "";
-
-    let name = editedData.map(record => record.name);
-
+    let name = editedData.map((record) => record.name);
     if (editedData.length === 0) {
       text = "You have not made any changes in Grid data!";
     } else {
       text = "Great! Changes saved For User : " + name;
     }
-
     Swal.fire({
       title: "Data Saved Successfully!",
       text: text,
@@ -123,15 +136,15 @@ export const Datatable = ({ currentScreen }) => {
   function convertArrayOfObjectsToCSV(array) {
     if (!array.length) return null;
 
-    const columnDelimiter = ',';
-    const lineDelimiter = '\n';
+    const columnDelimiter = ",";
+    const lineDelimiter = "\n";
     const keys = Object.keys(array[0]);
 
     const result = [];
     result.push(keys.join(columnDelimiter));
 
-    array.forEach(item => {
-      const values = keys.map(key => item[key] || '');
+    array.forEach((item) => {
+      const values = keys.map((key) => item[key] || "");
       result.push(values.join(columnDelimiter));
     });
 
@@ -142,13 +155,13 @@ export const Datatable = ({ currentScreen }) => {
     const csv = convertArrayOfObjectsToCSV(array);
     if (!csv) return;
 
-    const link = document.createElement('a');
-    const filename = 'export.csv';
+    const link = document.createElement("a");
+    const filename = "export.csv";
     const uri = `data:text/csv;charset=utf-8,${encodeURIComponent(csv)}`;
 
-    link.setAttribute('href', uri);
-    link.setAttribute('download', filename);
-    link.style.visibility = 'hidden';
+    link.setAttribute("href", uri);
+    link.setAttribute("download", filename);
+    link.style.visibility = "hidden";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -244,6 +257,9 @@ export const Datatable = ({ currentScreen }) => {
 
   return (
     <>
+      <ToastContainer
+        style={{ justifyContent: "center", display: "flex", top: "20px" }}
+      />
       <Box
         sx={{
           display: "flex",
