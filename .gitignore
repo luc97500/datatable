@@ -11,6 +11,8 @@
 # production
 /build
 
+/CICDDeployment
+
 # misc
 .DS_Store
 .env.local
