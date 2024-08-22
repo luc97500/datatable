@@ -101,14 +101,14 @@ export const Datatable = ({ currentScreen }) => {
 
     let name = editedData.map(record => record.name);
 
-    if (editedData.length == 0) {
+    if (editedData.length === 0) {
       text = "You have not made any changes in Grid data!";
     } else {
       text = "Great! Changes saved For User : " + name;
     }
 
     Swal.fire({
-      title: "Data Saved SuccessFully!",
+      title: "Data Saved Successfully!",
       text: text,
       icon: "success",
     });
@@ -118,6 +118,41 @@ export const Datatable = ({ currentScreen }) => {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  // CSV EXPORT
+  function convertArrayOfObjectsToCSV(array) {
+    if (!array.length) return null;
+
+    const columnDelimiter = ',';
+    const lineDelimiter = '\n';
+    const keys = Object.keys(array[0]);
+
+    const result = [];
+    result.push(keys.join(columnDelimiter));
+
+    array.forEach(item => {
+      const values = keys.map(key => item[key] || '');
+      result.push(values.join(columnDelimiter));
+    });
+
+    return result.join(lineDelimiter);
+  }
+
+  function downloadCSV(array) {
+    const csv = convertArrayOfObjectsToCSV(array);
+    if (!csv) return;
+
+    const link = document.createElement('a');
+    const filename = 'export.csv';
+    const uri = `data:text/csv;charset=utf-8,${encodeURIComponent(csv)}`;
+
+    link.setAttribute('href', uri);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   const customStyles = {
     headCells: {
@@ -223,6 +258,14 @@ export const Datatable = ({ currentScreen }) => {
           onChange={handleSearchChange}
           sx={{ width: 300 }}
         />
+        <Button
+          variant="contained"
+          color="secondary"
+          sx={{ ml: 2 }}
+          onClick={() => downloadCSV(filteredData)}
+        >
+          Export CSV
+        </Button>
       </Box>
 
       <div className="data-table-wrapper">
